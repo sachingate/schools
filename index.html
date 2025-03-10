@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #home, #student, #teacher, #Admin, #fee, .class-container a {
+            text-decoration: none;
+            color: black;
+        }
+        #home:hover, #student:hover, #teacher:hover, #Admin:hover, #fee:hover, .class-container a:hover {
+            color: rgba(29, 73, 123, 5);
+            transition: .3s;
+            transform: translateY(-2px);
+        }
+        #logout {
+            text-decoration: none;
+            color: red; 
+            border: 1px solid black; 
+            background-color: white;
+            padding: 0px 6px;
+        }
+        #logout:hover {
+            background-color: red;
+            color: white;
+        }
+        
+        .wrapper {
+            background-color: yellow;
+            padding: 12px 12px;
+        }
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .menu h3 {
+            margin-right: auto;
+            border-radius: 50%;
+            border: 1px dotted black;
+            padding: 10px;
+        }
+
+        /* Hover dropdown */
+        .class-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: none;
+            border: 2px solid black;
+            width: 120px;
+            text-align: center;
+            background-color: white;
+            z-index: 1;
+        }
+        
+        .class-container:hover .list {
+            display: block;
+        }
+
+        .list a {
+            background-color: lightblue;
+            padding: 5px 12px;
+            text-decoration: none;
+            color: black;
+            font-weight: bolder;
+            display: block;
+        }
+
+        .list a:hover {
+            background-color: grey;
+            color: white;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+        .login-container h2 {
+            margin-bottom: 15px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            background-color: gold;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .login-container button:hover {
+            background-color: rgb(255, 250, 0);
+        }
+
+        .hero-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(-45deg, yellow 50%, transparent 50%);
+            margin-top: 1px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .hero-text {
+            max-width: 640px;
+            margin-top: 20px;
+        }
+        .hero-text h1 {
+            color: black;
+            font-weight: bold;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .hero-text p {
+            margin-bottom: 20px;
+        }
+        .hero-text button {
+            background-color: gold;
+            border-radius: 20px;
+            color: white;
+            border: none;
+            padding: 16px 23px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .about-text {
+            max-width: 60%;
+        }
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        .about-text button {
+            background-color: purple;
+            border: 1px solid black;
+            padding: 10px 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+        .about-image img {
+            max-width: 100%;
+            border-radius: 12px;
+        }
+
+        .campus-section {
+            text-align: center;
+            padding: 20px;
+        }
+        .campus-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .campus-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .campus-images img {
+            width: 100%;
+            max-width: 290px;
+            border-radius: 23px;
+            height: auto;
+        }
+
+        .footer-links {
+            background-color: yellow;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        .footer-links ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .social-icons i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background-color: grey;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 2px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .menu {
+                justify-content: center;
+                gap: 10px;
+            }
+            .menu h3 {
+                margin-right: 0;
+            }
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text {
+                max-width: 100%;
+            }
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-text {
+                max-width: 100%;
+            }
+            .campus-images img {
+                max-width: 100%;
+            }
+            .footer-links {
+                flex-direction: column;
+                text-align: center;
+            }
+            .social-icons {
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            .menu h3 {
+                margin-bottom: 10px;
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .about-text h2 {
+                font-size: 1.5rem;
+            }
+            .campus-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .menu {
+                display: none;
+                
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .menu.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <ul class="menu" id="menu">
+            <h3>Hello</h3>
+            <a id="home" href="base.html">Home</a>
+            <a id="student" href="student.html">Students Pannel</a>
+            <a id="teacher" href="teacher.html">Teachers Pannel</a>
+            <a id="Admin" href="timetable.html">Time Table</a>
+            <a href="fee.html" id="fee">Fees</a>
+            <a href="login.html">Login page</a>
+            <a href="bus.html">Bus</a>
+            
+            <!-- Wrap class inside a container 
+            <div class="class-container">
+                <a href="#" id="class">Class</a>
+                <div class="list">
+                    <a href="#">LKG</a><hr>
+                    <a href="#">1<sup>th</sup></a><hr>
+                    <a href="#">2<sup>th</sup></a><hr>
+                    <a href="#">3<sup>th</sup></a><hr>
+                    <a href="#">4<sup>th</sup></a><hr>
+                    <a href="#">5<sup>th</sup></a><hr>
+                    <a href="#">6<sup>th</sup></a><hr>
+                    <a href="#">7<sup>th</sup></a><hr>
+                    <a href="#">8<sup>th</sup></a><hr>
+                    <a href="#">9<sup>th</sup></a><hr>
+                    <a href="#">10<sup>th</sup></a><hr>
+                    <a href="#">11<sup>th</sup></a><hr>
+                    <a href="#">12<sup>th</sup> Science</a><hr>
+                    <a href="#">12<sup>th</sup> Arts</a><hr>
+                    <a href="#">12<sup>th</sup> Bio</a>
+                </div>
+            </div>
+-->
+            <a id="logout" href="#">Logout</a>
+        </ul>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>SCHOOL MANAGEMENT<br> SYSTEM</h1>
+            <p>Lorem ipsum ipsa est quas facilis voluptatem eos exercitationem suscipit aliquam eaque. Repellendus voluptates autem, ea vel magnam ut consequatur animi consectetur pariatur dignissimos facere minus non officiis cupiditate rerum maiores molestias. Corporis praesentium fuga, nostrum eum non tempora laboriosam unde exercitationem, sed, fugiat libero!</p>
+            <button>Call To Action</button>
+        </div>
+        <div class="login-container">
+            <h2>Admission Form</h2>
+            <form>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="password" name="mobile" placeholder="Mobile" required>
+                <input type="text" name="name" placeholder="Your Class" required>
+                <button type="submit">Submit Form</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <div class="about-text">
+            <h2>About School</h2>
+            <p>A school is a place of learning where students acquire knowledge, develop skills, and build character. It provides a structured environment where young minds are nurtured and prepared for future challenges. Schools offer education in various subjects, including mathematics, science, literature, and history, fostering intellectual growth. Apart from academics, schools also emphasize extracurricular activities such as sports, music, and arts, allowing students to explore their talents and interests.</p>
+            <button>Know More</button>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1710845426664-6496ea6671ac?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODB8fHNjaG9vbCUyMGNhbXB1c3xlbnwwfHwwfHx8MA%3D%3D" alt="School Campus">
+        </div>
+    </div>
+
+    <div class="campus-section">
+        <h2>OUR CAMPUS</h2>
+        <div class="campus-images">
+            <img src="https://images.unsplash.com/photo-1527891751199-7225231a68dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2Nob29sJTIwY2FtcHVzfGVufDB8fDB8fHww" alt="Campus 1">
+            <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Nob29sJTIwY2FtcHVzfGVufDB8fDB8fHww" alt="Campus 2">
+            <img src="https://plus.unsplash.com/premium_photo-1693035340634-ebc60cca8bd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2Nob29sJTIwY2FtcHVzfGVufDB8fDB8fHww" alt="Campus 3">
+            <img src="https://images.unsplash.com/photo-1563265500-fa2ff1f4fc9d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2Nob29sJTIwY2FtcHVzfGVufDB8fDB8fHww" alt="Campus 4">
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <div>
+            <h2>Important links</h2>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Students Pannel</a></li>
+                <li><a href="#">Teachers Pannel</a></li>
+                <li><a href="#">Bus Routes</a></li>
+                <li><a href="#">Fees</a></li>
+            </ul>
+        </div>
+        <div class="social-icons">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-telegram"></i>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 School Management System. All Rights Reserved.
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
