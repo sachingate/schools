@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Timetable</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* Class Selector Dropdown */
+        .class-selector {
+            margin: 20px 0;
+            text-align: end;
+        }
+
+        .grade-dropdown {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 2px solid #3498db;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        /* Timetable Table */
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background-color: #3498db;
+            color: white;
+        }
+
+        thead th, tbody td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        /* Subject Cards */
+        .subject-card {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .subject-card.hidden {
+            display: none;
+        }
+
+        /* Subject Colors */
+        .subject-math { background-color: #ffeb3b; }
+        .subject-physics { background-color: #ff9800; color: white; }
+        .subject-english { background-color: #4caf50; color: white; }
+        .subject-science { background-color: #2196f3; color: white; }
+        .subject-history { background-color: #9c27b0; color: white; }
+        .subject-geography { background-color: #ff5722; color: white; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { width: 95%; }
+            .grade-dropdown { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>School Timetable</h1>
+            <div class="class-selector">
+                <select class="grade-dropdown" id="gradeSelect">
+                    <option value="all">All Class</option>
+                    <option value="1">Class 1</option>
+                    
+                    <option value="2">Class 2</option>
+                    <option value="3">Class 3</option>
+                    <option value="4">Class 4</option>
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                    <option value="11">Class 11</option>
+                    <option value="12">Class 12</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Timetable Table -->
+        <table class="timetable">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>9:00 AM - 10:00 AM</th>
+                    <th>10:00 AM - 11:00 AM</th>
+                    <th>11:00 AM - 12:00 PM</th>
+                    <th>12:00 PM - 01:00 PM</th>
+                    <th>01:00 PM - 02:00 PM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Class 1 Timetable -->
+                <tr data-grade="1">
+                    <td>8:00 - 8:45</td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="1">
+                            Mathematics<br>
+                            Mr. Sharma<br>
+                            Room 101
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Class 2 Timetable -->
+                <tr data-grade="2">
+                    <td>9:00 - 9:45</td>
+                    <td>
+                        <div class="subject-card subject-science" data-grade="2">
+                            Science<br>
+                            Ms. Verma<br>
+                            Room 102
+                        </div>
+                    </td>
+                </tr>
+                <tr data-grade="11">
+                    <td>Mon-Sat</td>
+                <td>
+                    <div class="subject-card subject-physics" data-grade="11">
+                        Physics<br>
+                        Dr. Reddy<br>
+                        Lab 5
+                    </div>
+                </td>
+                <td>
+                    <div class="subject-card subject-physics" data-grade="11">
+                        Chemistry<br>
+                        Neetu Sharma<br>
+                        Lab 5
+                    </div>
+                </td>
+                <td>
+                    <div class="subject-card subject-english" data-grade="11">
+                        English<br>
+                        Ravi Sekhawat<br>
+                        Lab 5
+                    </div>
+                </td>
+                <td>
+                    <div class="subject-card subject-math" data-grade="11">
+                        Mathematics<br>
+                        Suman Choudhary<br>
+                        Lab 5
+                    </div>
+                </td>
+                <td>
+                    <div class="subject-card subject-geography" data-grade="11">
+                        Hindi<br>
+                        Ankush Gautam<br>
+                        Lab 5
+                    </div>
+                </td>
+            </tr>
+            
+                <!-- Class 12 Timetable -->
+                <tr data-grade="12">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="10">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="9">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="8">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="7">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="6">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="5">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="3">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Class 12 Timetable -->
+                <tr data-grade="4">
+                    <td>10:00 - 10:45</td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Physics<br>
+                            Dr. Reddy<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-physics" data-grade="12">
+                            Chemistry<br>
+                            Neetu Sharma<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-english" data-grade="12">
+                            English<br>
+                            Ravi Sekhawat<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-math" data-grade="12">
+                            Mathematics<br>
+                            Suman Choudhary<br>
+                            Lab 5
+                        </div>
+                    </td>
+                    <td>
+                        <div class="subject-card subject-geography" data-grade="12">
+                            Hindi<br>
+                            Ankush Gautam<br>
+                            Lab 5
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gradeSelect = document.getElementById('gradeSelect');
+            const timetableRows = document.querySelectorAll('tbody tr');
+    
+            // Function to show the selected class timetable
+            const filterTimetable = () => {
+                const selectedGrade = gradeSelect.value;
+    
+                timetableRows.forEach(row => {
+                    const rowGrade = row.dataset.grade;
+    
+                    // If selectedGrade is "all", show everything; otherwise, show only the selected class
+                    if (selectedGrade === 'all') {
+                        row.style.display = ''; 
+                    } else {
+                        row.style.display = rowGrade === selectedGrade ? '' : 'none';
+                    }
+                });
+            };
+    
+            // Hide all rows initially except for the selected one
+            gradeSelect.addEventListener('change', filterTimetable);
+    
+            // Call function once to hide rows initially
+            filterTimetable();
+        });
+    </script>
+    
+</body>
+</html>

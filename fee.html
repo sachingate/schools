@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Management System</title>
+    <style>
+        .data-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 96%;
+            max-width: 1000px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .h1 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        button {
+            margin-left: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 0.2px solid grey;
+            height: 30px;
+            cursor: pointer;
+            padding: 0 15px;
+        }
+        .btn-add1 {
+            background-color: wheat;
+            margin-left: 640px;
+            margin-top: 30px;
+        }
+        .btn-add1:hover {
+            background-color: rgb(235, 206, 152);
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #submitButton:hover{
+            color: white;
+        }
+        #reset:hover{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color: lightblue; height: auto; border-radius: 5px; user-select: none; padding-bottom: 20px;">
+    <div style="display: flex;">
+        <h1 style="margin-left: 30px; padding-top: 30px; color: blanchedalmond; margin-left: 72px;">Fee Management</h1>
+        <button id="addButton" class="btn-add1">+Add New</button>
+    </div>
+    
+    <div id="ddd" style="display: none; padding: 20px;">
+        <form id="feeForm" action="/fees" method="POST">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; gap: 21px;">
+                <span>
+                    <label>Student ID<span style="color: red;">*</span></label>
+                    <input id="studentId" type="text" required name="student_id">
+                </span>
+                <span>
+                    <label>Student Name<span style="color: red;">*</span></label>
+                    <input id="studentName" type="text" required name="student_name">
+                </span>
+                <span>
+                    <label>Class<span style="color: red;">*</span></label>
+                    <input id="studentClass" type="text" required name="student_class">
+                </span>
+                <span>
+                    <label>Section<span style="color: red;">*</span></label>
+                    <input id="section" type="text" required name="section">
+                </span>
+                <span>
+                    <label>Roll Number<span style="color: red;">*</span></label>
+                    <input id="rollNumber" type="text" required name="roll_number">
+                </span>
+                <span>
+                    <label>Total Fee<span style="color: red;">*</span></label>
+                    <input id="totalFee" type="number" required name="total_fee">
+                </span>
+                <span>
+                    <label>Paid Amount<span style="color: red;">*</span></label>
+                    <input id="paidAmount" type="number" required name="paid_amount">
+                </span>
+                <span>
+                    <label>Due Amount</label>
+                    <input id="dueAmount" type="number" readonly>
+                </span>
+                <span>
+                    <label>Payment Date<span style="color: red;">*</span></label>
+                    <input id="paymentDate" type="date" required name="payment_date">
+                </span>
+                <span>
+                    <label>Due Date<span style="color: red;">*</span></label>
+                    <input id="dueDate" type="date" required name="due_date">
+                </span>
+                <span>
+                    <label>Late Fee</label>
+                    <input id="lateFee" type="number" name="late_fee">
+                </span>
+                <span>
+                    <label>Payment Status</label>
+                    <select id="paymentStatus" name="payment_status">
+                        <option value="Paid">Paid</option>
+                        <option value="Unpaid">Unpaid</option>
+                        <option value="Partial">Partial</option>
+                    </select>
+                </span>
+            </div>
+            <button id="submitButton" type="submit" style="background-color: red;">Submit</button>
+            <button type="reset" style="background-color: purple;" id="reset">Reset</button>
+            <button id="cancelButton" type="button">Cancel</button>
+        </form>
+    </div>
+    <div class="data-container">
+        <h1 class="h1">Fee Records</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Section</th>
+                    <th>Roll Number</th>
+                    <th>Total Fee</th>
+                    <th>Paid Amount</th>
+                    <th>Due Amount</th>
+                    <th>Payment Date</th>
+                    <th>Due Date</th>
+                    <th>Late Fee</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody id="feeRecords">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    document.getElementById('addButton').addEventListener('click', function() {
+        document.getElementById('ddd').style.display = 'block';
+    });
+
+    document.getElementById('cancelButton').addEventListener('click', function() {
+        document.getElementById('ddd').style.display = 'none';
+    });
+
+    document.getElementById('paidAmount').addEventListener('input', function () {
+        const totalFee = parseFloat(document.getElementById('totalFee').value) || 0;
+        const paidAmount = parseFloat(this.value) || 0;
+        const dueAmount = totalFee - paidAmount;
+        document.getElementById('dueAmount').value = dueAmount.toFixed(2);
+    });
+</script>
+</body>
+</html>
